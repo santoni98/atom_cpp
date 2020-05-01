@@ -210,12 +210,14 @@ int main() {
                         while (middle > arr[f][q]) {
                             q--;
                         }
-                        sravneniya5++;
+                        if(arr[f][w]==arr[f][q])
+                            sravneniya5=2*a*b;
                         if (w <= q) {
                             float temp = arr[f][w];
                             arr[f][w] = arr[f][q];
                             arr[f][q] = temp;
-                            perestanovki5++;
+                            if(arr[f][w]!=arr[f][q])
+                                perestanovki5+=2;
                             w++;
                             q--;
                         }
