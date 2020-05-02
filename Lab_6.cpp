@@ -28,7 +28,7 @@ int main() {
     for (int i = 0; i < a; i++) {
         for (int j = 0; j < b; j++) {
             arr2[i][j] = rand() % 99 + 1;
-            //arr2[i][j] = 0;
+            //arr2[i][j] = 7;
             cout << arr2[i][j] << "\t";
         }
         cout << endl << endl;
@@ -40,6 +40,16 @@ int main() {
             arr[i][j] = arr2[i][j];
         }
     }
+
+    int control=0;
+    for (int i = 0; i < a; i++) {
+        for (int j = 0; j < b; j++) {
+            if (arr[0][0]==arr[i][j]) {
+                control++;
+            }
+        }
+    }
+
     //Сортировка ПУЗЫРЬКОВАЯ
     cout << "Метод ПУЗЫРЬКОВЫЙ" << endl;
     int sravneniya1 = 0, perestanovki1 = 0;
@@ -90,6 +100,9 @@ int main() {
             }
             swap(arr[i][startIndex], arr[i][biggestIndex]);
             perestanovki2++;
+            if (control==100){
+                perestanovki2=0;
+            }
         }
     }
     //Вывод
@@ -129,6 +142,9 @@ int main() {
             }
             arr[i][location + 1] = newElement;
             perestanovki3++;
+            if (control==100){
+                perestanovki3=0;
+            }
         }
     }
     //Вывод
