@@ -7,7 +7,7 @@ int main(){
         a,      //нижняя граница скилла
         v,      //уровень скилла сотрудника
         r,      //верхняя граница скилла
-        m=0;    //количество разработчиков
+        m=0;    //максимальное количество разработчиков
     cin>>n;
     if(cin.fail()||1>n||n>100000){
         cout<<"Введено некорректное значение...";
@@ -57,16 +57,20 @@ int main(){
     int max=-1;
     int iclone;
     int j;
-    for(int i=0;i<n-1;i++){
-        j = i+1;
-        while(j<n){//
-            if(arr[i][1]<=arr[j][2]&&arr[i][3]>=arr[j][2]){
-                if(arr[j][1]<=arr[i][2]&&arr[j][3]>=arr[i][2]){
-                    m++;
+    for(int i=0;i<n;i++){
+        j = 0;
+        while(j<n){
+            if(j!=i){
+                if(arr[i][1]<=arr[j][2]&&arr[i][3]>=arr[j][2]){
+                    if(arr[j][1]<=arr[i][2]&&arr[j][3]>=arr[i][2]){
+                        cout<<arr[i][0]<<" "<<arr[j][0]<<endl;
+                        m++;
+                    }
                 }
             }
             j++;
         }
+        cout<<endl;
         if(m>max){
             max=m;
             iclone=i;
@@ -76,11 +80,14 @@ int main(){
     cout<<max<<endl;
 
     //Вывод
-    j = iclone+1;
+    j = 0;
+    cout<<arr[iclone][0]<<" ";
     while(j<n){//
-        if(arr[iclone][1]<=arr[j][2]&&arr[iclone][3]>=arr[j][2]){
-            if(arr[j][1]<=arr[iclone][2]&&arr[j][3]>=arr[iclone][2]){
-                cout<<arr[iclone][0]<<" ";
+        if(j!=iclone){
+            if(arr[iclone][1]<=arr[j][2]&&arr[iclone][3]>=arr[j][2]){
+                if(arr[j][1]<=arr[iclone][2]&&arr[j][3]>=arr[iclone][2]){
+                    cout<<arr[j][0]<<" ";
+                }
             }
         }
         j++;
@@ -88,7 +95,7 @@ int main(){
 
     return 0;
 }
-/*
+/* Входные значения
 5
 2 4 6
 1 3 5
