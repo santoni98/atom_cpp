@@ -3,14 +3,16 @@
 using namespace std;
 
 int sravneniya5 = 0, perestanovki5 = 0, cc=0;
+int a = 10,
+    b = 10;
 
 void sortRowWise(int** arr) {
     // loop for rows of matrix
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < a; i++) {
         // loop for column of matrix
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < a; j++) {
             // loop for comparison and swapping
-            for (int k = 0; k < 10 - j - 1; k++) {
+            for (int k = 0; k < a - j - 1; k++) {
                 sravneniya5++;
                 if (arr[i][k] > arr[i][k + 1]) {
                     // swapping of elements
@@ -55,8 +57,8 @@ void quicksort_colum(int **matr, int j, int first, int last)
 int main() {
     setlocale(LC_ALL, "Russian");
     //Размерность массива
-    int a = 10,
-        b = 10;
+    //int a = 10,
+    //    b = 10;
 
     // Выделение памяти под массив
     int** arr;
@@ -101,7 +103,7 @@ int main() {
     cout << "Метод ПУЗЫРЬКОВЫЙ" << endl;
     int sravneniya1 = 0, perestanovki1 = 0;
     for (int i = 0; i < a; i++) {
-        for (int k = 0; k < 10; k++) {
+        for (int k = 0; k < a; k++) {
             bool flag = true;
             for (int j = 0; j < b - 1; j++) {
                 //Алгоритм сортировки
@@ -117,7 +119,7 @@ int main() {
         }
     }
     for (int j = 0; j < a; j++) {
-        for (int k = 0; k < 10; k++) {
+        for (int k = 0; k < a; k++) {
             bool flag = true;
             for (int i = 0; i < b - 1; i++) {
                 //Алгоритм сортировки
@@ -312,8 +314,8 @@ int main() {
 
 
     sortRowWise(arr);
-    for(int i=0; i<=10; i++){
-        quicksort_colum(arr,i,0,9);
+    for(int i=0; i<=a; i++){
+        quicksort_colum(arr,i,0,a-1);
     }
     //Вывод
     for (int i = 0; i < a; i++) {
