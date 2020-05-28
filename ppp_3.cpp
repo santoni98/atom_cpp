@@ -40,7 +40,6 @@ int main(){
     for (int q=1; q<=t; q++){
         if (q==1){
             //Принятие значений одного графа
-
             cin>>n1;
             if(cin.fail()||n1<1||n1>500000){
                 cout<<"Введено некорректное значение";
@@ -54,8 +53,7 @@ int main(){
             // Выделение памяти под массив
             int** arr1;
             arr1 = new int* [m1];
-            for (int i = 0; i < m1; i++)
-            {
+            for (int i = 0; i < m1; i++){
                 arr1[i] = new int[2];
             }
             //Принятие значений
@@ -64,14 +62,8 @@ int main(){
                     cin>>arr1[i][j];
                 }
             }
-            cout << "Вывод неотсортированного массива" << endl;
-            for (int i = 0; i < m1; i++) {
-                for (int j = 0; j < 2; j++) {
-                    cout << arr1[i][j] << " ";
-                }
-                cout << endl;
-            }
 
+            /***Создание и заполнение вспомогательного массива sort***/
             int** sort1;
             sort1 = new int* [n1];
             for (int i = 0; i < n1; i++){
@@ -82,9 +74,7 @@ int main(){
                     sort1[i][j]=-99;
                 }
             }
-            for(int i=0; i<n1; i++){
-                sort1[i][0]=i+1;
-            }
+            for(int i=0; i<n1; i++){sort1[i][0]=i+1;}
             int w=1;
             for(int a=0; a<n1; a++){
                 for(int b=0; b<m1; b++){
@@ -99,18 +89,29 @@ int main(){
                 }
                 w=1;
             }
-
+            /*Запись остатка от деления на 3 в последний столбец массива sort*/
             int u=1;
-            int count=0;
             for(int i=0; i<n1; i++){
                 while(sort1[i][u]!=-99){
-                    count++;
                     u++;
                 }
                 sort1[i][n1]=(u-1)%3;
                 u=1;
+            }/***Конец создания и заполнения вспомогательного массива sort***/
+
+            /*Копия массива sort*/
+            int** sort1clone;
+            sort1clone = new int* [n1];
+            for (int i = 0; i < n1; i++){
+                sort1clone[i] = new int[n1+1];
             }
-            /**************************************/
+            for(int i=0; i<n1; i++){
+                for(int j=0; j<n1+1; j++){
+                    sort1clone[i][j]=sort1[i][j];
+                }
+            }/*Конец создания копии массива sort*/
+
+            /*****************Вывод массива sort*********************/
             for(int i=0; i<n1; i++){
                 for(int j=0; j<n1+1; j++){
                     cout<<sort1[i][j]<<"\t";
@@ -118,6 +119,64 @@ int main(){
                 cout<<endl;
             }
             /*************************************/
+            int fuck=0;
+            int clonea=-5,// Переменные для сохранения
+                cloneb=-5,// подходящих по условию
+                clonec=-5;// вершин графа
+            for(int qq=0; qq<n1; qq++){   //Проходит сверху вниз по строкам
+                if(sort1[qq][4]!=-99){    //Проверка степени графа
+                    for(int a=0; a<n1-2; a++){          //Циклы размещений
+                        for(int b=1; b<n1-1; b++){      //Циклы размещений
+                            for(int c=2; c<n1; c++){    //Циклы размещений
+                                if(a<b&&b<c&&a<c&&sort1[qq][a]!=-99&&sort1[qq][b]!=-99&&sort1[qq][c]!=-99){      //Дополнительное условие
+                                    fuck++;
+                                    for(int t=0; t<n1; t++){      //
+                                        for(int j=1; j<n1; j++){  //
+                                            if(sort1[t][j]==a||sort1[t][j]==b||sort1[t][j]==c){
+                                                sort1clone[t][j]=-99;   //Удаление abc из массива
+                                            }
+                                        }
+                                    }
+
+                                    //Подсчет остатка от деления на 3
+                                    int u=1;
+                                    for(int i=0; i<n1; i++){
+                                        while(sort1clone[i][u]!=-99){
+                                            u++;
+                                        }
+                                        sort1clone[i][n1]=(u-1)%3;
+                                        u=1;
+                                    }
+                                    //Проверка остатков
+                                    int schetchik=0;
+                                    for(int i=0; i<n1; i++){
+                                        if(sort1[i][n1]==sort1clone[i][n1]){
+                                            schetchik++;
+                                        }
+                                    }
+                                    if(schetchik==n1){
+                                        clonea=sort1[qq][a];cloneb=sort1[qq][b];clonec=sort1[qq][c];
+                                    }
+
+                                    //Возвращение значений
+                                    for(int i=0; i<n1; i++){
+                                        for(int j=0; j<n1+1; j++){
+                                            sort1clone[i][j]=sort1[i][j];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                cout<<"***"<<fuck<<"***"<<endl;
+            }
+            if(clonea!=-5&&cloneb!=-5&&clonec!=-5){
+                cout<<"Yes\n3\n"<<clonea<<" "<<cloneb<<" "<<clonec;
+            }else{
+                cout<<"No";
+            }
+
             /*for(int i=0; i<n1; i++){
                 if(sort1[i][4]!=-99){
 
@@ -146,7 +205,7 @@ int main(){
                 }else{
                     cout<<"No"<<endl;
                 }
-            }*/
+            }/**/
         }
         else if (q==2){
             //Принятие значений одного графа
