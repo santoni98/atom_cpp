@@ -61,31 +61,26 @@ int main() {
             for(int r=N-1; r<M;r++){
                 cout<<otborny[r];
             }
-
-            //return 0;
-            }else if(x==3){
-                //Вставка текста из файла
-                ifstream infile;
-                ofstream outfile;
-
-                infile.open("of.txt");
-                outfile.open("text.txt");
-
-                char buffer[1000];           //буффер под строку
-
-                while(!infile.eof()){        //пока не конец исходного файла
-                    infile.getline(buffer,sizeof(buffer));  //читаем построчно
-                    outfile<<buffer<<endl;                  //записываем строку в выходной файл
-                }
-
-                infile.close();     //закрываем
-                outfile.close();    //файлы
-                cout<<endl<<"Вставка успешно завершена"<<endl;
-                //return 0;
+        }else if(x==3){
+            //Вставка текста из файла
+            ifstream infile;
+            ofstream outfile;
+            infile.open("of.txt");
+            outfile.open("text.txt");
+            char buffer[1000];           //буффер под строку
+            while(!infile.eof()){        //пока не конец исходного файла
+                infile.getline(buffer,sizeof(buffer));  //читаем построчно
+                outfile<<buffer<<endl;                  //записываем строку в выходной файл
             }
-            cin.get();cin.get();
 
-            if(g==1) system("cls");
+            infile.close();     //закрываем
+            outfile.close();    //файлы
+            cout<<endl<<"Вставка успешно завершена"<<endl;
+            //return 0;
+        }
+        cin.get();cin.get();
+
+        if(g==1) system("cls");
     }
     return 0;
 }
