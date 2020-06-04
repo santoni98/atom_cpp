@@ -6,12 +6,13 @@ using namespace std;
 int main() {
     for(int g=1;g<3;g++){
         cout<<"Выберите действие, которое хотите совершить:"<<endl<<
-            "  1 - Добавление в конец"                    <<endl<<
-            "  2 - Отбор (с N до M символа)"              <<endl<<
-            "  3 - Вставка текста из файла"               <<endl<<
+            "  1 - Добавление в конец"                      <<endl<<
+            "  2 - Отбор (с N до M символа)"                <<endl<<
+            "  3 - Вставка текста из файла"                 <<endl<<
+            "  4 - Вывод текста с файла text.txt"           <<endl<<
             "  Действие номер: ";
             int x; cin>>x;
-            if (cin.fail()||x!=1&&x!=2&&x!=3){
+            if (cin.fail()||x!=1&&x!=2&&x!=3&&x!=4){
                 cout<<endl<<"Введено некорректное значение..."<<endl;
                 return 0;
             }
@@ -77,6 +78,17 @@ int main() {
             outfile.close();    //файлы
             cout<<endl<<"Вставка успешно завершена"<<endl;
             //return 0;
+        }else if(x==4){
+            ifstream infile;
+            infile.open("text.txt");
+            string all;
+            while(infile){
+                string str;
+    		    getline(infile, str);
+                int t=str.length();
+                all+=str+"\n";
+            }
+            cout<<all;
         }
         cin.get();cin.get();
 
